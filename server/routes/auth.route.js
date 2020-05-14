@@ -1,9 +1,8 @@
 const express = require('express');
 const asyncHandler = require('express-async-handler')
 const passport = require('passport');
-const userCtrl = require('../controllers/user.controller');
-const authCtrl = require('../controllers/auth.controller');
-const config = require('../config/config');
+const userController = rootRequire('controllers/user.controller');
+const authController = rootRequire('controllers/auth.controller');
 
 const router = express.Router();
 module.exports = router;
@@ -14,7 +13,7 @@ router.get('/me', passport.authenticate('jwt', { session: false }), login);
 
 
 async function register(req, res, next) {
-  let user = await userCtrl.insert(req.body);
+  let user = await userController.insert(req.body);
   user = user.toObject();
   delete user.hashedPassword;
   req.user = user;
@@ -23,6 +22,6 @@ async function register(req, res, next) {
 
 function login(req, res) {
   let user = req.user;
-  let token = authCtrl.generateToken(user);
+  let token = authController.generateToken(user);
   res.json({ user, token });
 }
