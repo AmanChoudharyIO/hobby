@@ -4,9 +4,9 @@ const Joi = require('joi');
 require('dotenv').config();
 
 //Validate files through requests
-const envVarsSchema = rootRequire('requests/config/envVars.schema');
+const configSchema = rootRequire('requests/config/config');
 
-const { error, value: envVars } = Joi.validate(process.env, envVarsSchema);
+const { error, value: envVars } = Joi.validate(process.env, configSchema);
 if (error) {
   throw new Error(`Config validation error: ${error.message}`);
 }

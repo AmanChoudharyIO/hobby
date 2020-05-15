@@ -1,14 +1,16 @@
 const express = require('express');
-const asyncHandler = require('express-async-handler')
 const passport = require('passport');
+const asyncHandler = require('express-async-handler')
+const validateMiddleware = rootRequire('middlewares/validate.middleware');
 const userController = rootRequire('controllers/user.controller');
 const authController = rootRequire('controllers/auth.controller');
+const authSchema = rootRequire('requests/auth/auth');
 
 const router = express.Router();
 module.exports = router;
 
-router.post('/register', asyncHandler(register), login);
-router.post('/login', passport.authenticate('local', { session: false }), login);
+router.post('/register', validateMiddleware(authSchema.register, 'body'), asyncHandler(register), login);
+router.post('/login', validateMiddleware(authSchema.login, 'body'), passport.authenticate('local', { session: false }), login);
 router.get('/me', passport.authenticate('jwt', { session: false }), login);
 
 

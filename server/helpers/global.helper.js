@@ -4,7 +4,8 @@ const log_level = {
   0: 'LOG',
   1: 'INFO',
   2: 'WARNING',
-  3: 'ERROR'
+  3: 'ERROR',
+  4: 'DIE'
 };
 
 //TODO: Beautify console logs
@@ -32,7 +33,7 @@ let console_log = function () {
 }
 
 let console_die = function(){
-  console_log();
+  console_log(arguments[0],4);
   process.exit();
 }
 

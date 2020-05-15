@@ -10,7 +10,7 @@ const cors = require('cors');
 const helmet = require('helmet');
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./swagger.json');
-const routes = rootRequire('routes/index.route');
+const routes = rootRequire('routes/routes');
 const passport = require('./passport')
 
 const app = express();

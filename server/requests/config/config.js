@@ -1,7 +1,7 @@
 const Joi = require('joi');
 
 // define validation for all the env vars
-const envVarsSchema = Joi.object({
+const schemas = Joi.object({
   NODE_ENV: Joi.string()
     .allow(['development', 'production', 'test', 'provision'])
     .default('development'),
@@ -29,4 +29,4 @@ const envVarsSchema = Joi.object({
   .required();
 
 
-module.exports = envVarsSchema;
+module.exports = schemas;
